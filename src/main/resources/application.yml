@@ -54,7 +54,7 @@ spring:
         reset-enable: true
         #启用
         enabled: true
-#mybatis:
-#  mapper-locations:
-#    - classpath: mapper/*.xml
-#    - classpath*: com/**/mapper/*.xml
+mybatis:
+  mapper-locations:
+    - classpath: mapper/*.xml
+    - classpath*: com/**/mapper/*.xml
