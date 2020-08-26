@@ -55,6 +55,6 @@ spring:
         #启用
         enabled: true
 mybatis:
-  mapper-locations:
+  config-location:
     - classpath: mapper/*.xml
     - classpath*: com/**/mapper/*.xml
