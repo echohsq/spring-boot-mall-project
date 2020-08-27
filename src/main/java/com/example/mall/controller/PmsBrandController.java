@@ -41,11 +41,11 @@ public class PmsBrandController {
         int value = pmsBrandService.createBrand(pmsBrand);
         if (value == 1) {
             result = CommonResult.sucess(pmsBrand);
-            LOGGER.debug("createBrand success:{}", pmsBrand);
+            LOGGER.info("createBrand success:{}", pmsBrand);
         }
         else {
             result = CommonResult.failed("操作失败");
-            LOGGER.debug("createBrand failed:{}", pmsBrand);
+            LOGGER.info("createBrand failed:{}", pmsBrand);
         }
         return result;
     }
