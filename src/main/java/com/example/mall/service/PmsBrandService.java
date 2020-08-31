@@ -44,4 +44,12 @@ public interface PmsBrandService {
      * @return 操作值， 1， 0
      */
     PmsBrand getBrand(Long id);
+
+    /**
+     * 分页查询
+     * @param pageNum 页面数量
+     * @param pageSize 页面大小
+     * @return 商品类列表
+     */
+    List<PmsBrand> listBrand(int pageNum, int pageSize);
 }

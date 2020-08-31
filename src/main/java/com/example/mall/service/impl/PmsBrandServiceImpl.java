@@ -4,6 +4,7 @@ import com.example.mall.mbg.mapper.PmsBrandMapper;
 import com.example.mall.mbg.model.PmsBrand;
 import com.example.mall.mbg.model.PmsBrandExample;
 import com.example.mall.service.PmsBrandService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,5 +73,19 @@ public class PmsBrandServiceImpl implements PmsBrandService {
     @Override
     public PmsBrand getBrand(Long id) {
         return pmsBrandMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param pageNum  页面数量
+     * @param pageSize 页面大小
+     * @return 商品类列表
+     */
+    @Override
+    public List<PmsBrand> listBrand(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+
+        return pmsBrandMapper.selectByExample(new PmsBrandExample());
     }
 }

@@ -17,7 +17,7 @@ public class CommonPage<T> {
     private Long total;
     private List<T> list;
 
-    private static <T> CommonPage<T> restPage(List<T> list) {
+    public static <T> CommonPage<T> restPage(List<T> list) {
         CommonPage<T> rest = new CommonPage<>();
         PageInfo<T> info = new PageInfo<>(list);
         rest.setList(info.getList());
