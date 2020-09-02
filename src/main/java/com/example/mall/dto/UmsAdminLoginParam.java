@@ -1,5 +1,7 @@
 package com.example.mall.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * @author hsqzs
  * date 2020/9/2 16:39

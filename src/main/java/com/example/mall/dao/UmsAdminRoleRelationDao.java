@@ -1,6 +1,7 @@
 package com.example.mall.dao;
 
 import com.example.mall.mbg.model.UmsPermission;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface UmsAdminRoleRelationDao {
      * @param adminId id
      * @return 权限表
      */
-    List<UmsPermission> getPermissions(Long adminId);
+    List<UmsPermission> getPermissions(@Param("adminId") Long adminId);
 }

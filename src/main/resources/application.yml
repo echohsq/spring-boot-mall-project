@@ -56,7 +56,7 @@ spring:
         enabled: true
 mybatis:
   config-location:
-    - classpath: mapper/*.xml
+    - classpath: /mapper/*.xml
     - classpath*: com/**/mapper/*.xml
 
 # 自定义jwt key
