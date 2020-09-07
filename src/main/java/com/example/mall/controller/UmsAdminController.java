@@ -1,10 +1,13 @@
 package com.example.mall.controller;
 
+import cn.hutool.core.collection.CollUtil;
 import com.example.mall.common.api.CommonResult;
 import com.example.mall.dto.UmsAdminLoginParam;
 import com.example.mall.mbg.model.UmsAdmin;
 import com.example.mall.mbg.model.UmsPermission;
+import com.example.mall.mbg.model.UmsRole;
 import com.example.mall.service.UmsAdminService;
+import com.example.mall.service.UmsRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author hsqzs
@@ -27,6 +32,8 @@ import java.util.Map;
 public class UmsAdminController {
     @Autowired
     private UmsAdminService adminService;
+    @Autowired
+    private UmsRoleService umsRoleService;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
@@ -63,5 +70,33 @@ public class UmsAdminController {
     public CommonResult<List<UmsPermission>> getPermissionList(@PathVariable Long adminId) {
         List<UmsPermission> permissionList = adminService.getPermissions(adminId);
         return CommonResult.success(permissionList);
+    }
+
+    @ApiOperation("获取登录用户的全部信息")
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult info(Principal principal) {
+        if (principal == null) {
+            return CommonResult.unauthorized(null);
+        }
+        Map<String, Object> data = new HashMap<>(16);
+        String username = principal.getName();
+        UmsAdmin admin = adminService.getAdminByUserName(username);
+        data.put("username", admin.getUsername());
+        data.put("menus", umsRoleService.getMenuList(admin.getId()));
+        data.put("icon", admin.getIcon());
+        List<UmsRole> roleList = adminService.getRoleList(admin.getId());
+        if(CollUtil.isNotEmpty(roleList)){
+            List<String> roles = roleList.stream().map(UmsRole::getName).collect(Collectors.toList());
+            data.put("roles",roles);
+        }
+        return CommonResult.success(data);
+    }
+
+    @ApiOperation("登出")
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult logout() {
+        return CommonResult.success(null);
     }
 }

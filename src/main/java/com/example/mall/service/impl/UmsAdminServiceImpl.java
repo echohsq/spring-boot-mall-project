@@ -6,6 +6,7 @@ import com.example.mall.mbg.mapper.UmsAdminMapper;
 import com.example.mall.mbg.model.UmsAdmin;
 import com.example.mall.mbg.model.UmsAdminExample;
 import com.example.mall.mbg.model.UmsPermission;
+import com.example.mall.mbg.model.UmsRole;
 import com.example.mall.service.UmsAdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,5 +121,16 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Override
     public List<UmsPermission> getPermissions(Long adminId) {
         return umsAdminRoleRelationDao.getPermissions(adminId);
+    }
+
+    /**
+     * 获取用户角色
+     *
+     * @param adminId 管理用户id
+     * @return 角色list
+     */
+    @Override
+    public List<UmsRole> getRoleList(Long adminId) {
+        return umsAdminRoleRelationDao.getRoleList(adminId);
     }
 }

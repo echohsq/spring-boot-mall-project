@@ -2,6 +2,7 @@ package com.example.mall.service;
 
 import com.example.mall.mbg.model.UmsAdmin;
 import com.example.mall.mbg.model.UmsPermission;
+import com.example.mall.mbg.model.UmsRole;
 
 import java.util.List;
 
@@ -40,4 +41,11 @@ public interface UmsAdminService {
      * @return 权限list
      */
     List<UmsPermission> getPermissions(Long adminId);
+
+    /**
+     * 获取用户角色
+     * @param adminId 管理用户id
+     * @return 角色list
+     */
+    List<UmsRole> getRoleList(Long adminId);
 }
