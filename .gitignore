@@ -10,8 +10,8 @@ target/
 .factorypath
 .project
 .settings
-.springBeans
-.sts4-cache
+.springBeans.sts4-cache
+.properties
 
 ### IntelliJ IDEA ###
 .idea
